@@ -17,38 +17,46 @@ function createMarkup(arr) {
     return arr.map(({ preview, original, description }) => 
       `<li >
         <a href="${original}">
-          <img  src="${preview}" data-source="${original}" alt="${description}" width="372" height="240"/>
+          <img class="gallery__image" src="${preview}" data-source="${original}" alt="${description}" width="372" height="auto"/>
         </a>
       </li>`).join("")
 }
 
 box1.insertAdjacentHTML("beforeend", createMarkup(galleryItems))
 box1.addEventListener("click", handlerClick)
+ 
 
 function handlerClick(evt) {
-    console.log("tar", evt.target)
-    console.log(evt.currentTarget)
-    if (evt.target === evt.currentTarget) {
-    return   
-    }
-
-    evt.preventDefault();
-    
-    const imgOriginSize = evt.target.dataset.source;
-    console.log(imgOriginSize)
-    
-const instance = basicLightbox.create(`
-<img src="${imgOriginSize}"  />
-`)
-  instance.show()
-  box1.addEventListener("keydown", onEscClick)
-function onEscClick(evt) {
-  if (evt.code === "Escape") {
-    instance.close();
+ 
+  evt.preventDefault();
+  
+  if (!evt.target.classList.contains("gallery__image")) {
+    return
   }
-}
+
+    
+  const imgOriginSize = evt.target.dataset.source;
+  
+
+ const instance = basicLightbox.create(`<img src="${imgOriginSize}" />`)
+  instance.show()
 }
 
 
+//function onEscClick(evt) {
+//  if (evt.code === "Escape") {
+//    modalClose();
+//  }
+//}
+//function modalClose() {
+//     const instance = basicLightbox.create(`<img src="${imgOriginSize}" />`)
+//
+//    instance.onShow(() => {
+//      box1.addEventListener("click", handlerClick);
+//    });
+//    instance.onClose(() => {
+//      box1.removeEventListener("keydown", onEscClick);
+//    });
+//    };
 
 

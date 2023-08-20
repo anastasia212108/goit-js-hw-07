@@ -12,7 +12,7 @@ console.log(galleryItems);
 //  }
 const box2 = document.querySelector(".js-box2")
 box2.insertAdjacentHTML("beforeend", createMarkup(galleryItems))
-box2.addEventListener("click", handlerClick)
+
 
 function createMarkup(array) {
     return array.map(({ preview, original, description }) => 
@@ -23,15 +23,8 @@ function createMarkup(array) {
 </li>`).join("")
 }
 
-function handlerClick(evt) {
-    evt.preventDefault()
-    if (evt.target === evt.currentTarget) {
-        return
-    }
 
     let gallery = new SimpleLightbox('.gallery a', {
     captionsData: "alt",
     captionDelay: 250
 })
- 
-}
